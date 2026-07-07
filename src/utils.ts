@@ -1,5 +1,4 @@
 
-import { logger } from "./misc/logger";
 export interface WebhookMessage {
     id: string;
     from: string;
@@ -48,7 +47,7 @@ export interface ParsedWebhook {
 
 export function parseWebhook(body: any, log_raw?: boolean, log_parsed?: boolean): ParsedWebhook {
     if (log_raw) {
-        logger.log(`==============RAW WEBHOOK BODY==============\n${JSON.stringify(body, null, 2)}\n=====================================`);
+        console.log(`==============RAW WEBHOOK BODY==============\n${JSON.stringify(body, null, 2)}\n=====================================`);
     }
     const entry = body.entry?.[0];
     const change = entry?.changes?.[0];
@@ -130,33 +129,33 @@ export function parseWebhook(body: any, log_raw?: boolean, log_parsed?: boolean)
 }
 
 export function logWebhook(webhook: ParsedWebhook): void {
-    logger.log("\n========== Incoming Webhook ==========");
+    console.log("\n========== Incoming Webhook ==========");
 
     if (webhook.message) {
-        logger.log(`Event        : MESSAGE`);
-        logger.log(`Type         : ${webhook.message.type}`);
-        logger.log(`WA ID        : ${webhook.waId}`);
-        logger.log(`Profile      : ${webhook.profileName}`);
-        logger.log(`Timestamp    : ${new Date(Number(webhook.message.timestamp) * 1000).toLocaleString()}`);
+        console.log(`Event        : MESSAGE`);
+        console.log(`Type         : ${webhook.message.type}`);
+        console.log(`WA ID        : ${webhook.waId}`);
+        console.log(`Profile      : ${webhook.profileName}`);
+        console.log(`Timestamp    : ${new Date(Number(webhook.message.timestamp) * 1000).toLocaleString()}`);
 
         if (webhook.message.type === "text") {
-            logger.log(`Text         : ${webhook.message.text}`);
+            console.log(`Text         : ${webhook.message.text}`);
         }
     }
 
     if (webhook.status) {
-        logger.log(`Event        : STATUS`);
-        logger.log(`Status       : ${webhook.status.status}`);
-        logger.log(`WA ID        : ${webhook.status.recipientId}`);
-        logger.log(`Timestamp    : ${new Date(Number(webhook.status.timestamp) * 1000).toLocaleString()}`);
+        console.log(`Event        : STATUS`);
+        console.log(`Status       : ${webhook.status.status}`);
+        console.log(`WA ID        : ${webhook.status.recipientId}`);
+        console.log(`Timestamp    : ${new Date(Number(webhook.status.timestamp) * 1000).toLocaleString()}`);
     }
 
     if (webhook.errors?.length) {
-        logger.log("Errors:");
+        console.log("Errors:");
         webhook.errors.forEach((error, index) => {
-            logger.log(`  ${index + 1}. ${error.message || JSON.stringify(error)}`);
+            console.log(`  ${index + 1}. ${error.message || JSON.stringify(error)}`);
         });
     }
 
-    logger.log("======================================\n");
+    console.log("======================================\n");
 }

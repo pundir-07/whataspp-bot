@@ -2,7 +2,6 @@ import * as messageRepository from "../respositories/message.repository.js";
 import * as userRepository from "../respositories/user.repository.js";
 import { MESSAGE_TYPES } from "../constants/message-types.js";
 import { ParsedWebhook } from "../utils.js";
-import { logger } from "../misc/logger.js";
 import {  createCompletion } from "./openai.service.js";
 import { systemPrompt } from "../lib/prompts/system.js";
 export async function handleIncomingMessage(webhook: ParsedWebhook): Promise<void> {
@@ -11,10 +10,10 @@ export async function handleIncomingMessage(webhook: ParsedWebhook): Promise<voi
 
     const user = await userRepository.findByWaId(waId);
     if (user) {
-        logger.log("User already exists");
+        console.log("User already exists");
     } else {
         if (webhook.profileName) {
-            logger.log("Creating new user entry in the db");
+            console.log("Creating new user entry in the db");
             await userRepository.upsert(waId, webhook.profileName);
         }
     }
@@ -101,5 +100,5 @@ export async function sendTextMessage(recipientNumber: string, messageText: stri
     });
 
     const data = await response.json();
-    logger.log(data);
+    console.log(data);
 }
