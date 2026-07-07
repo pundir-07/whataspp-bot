@@ -24,6 +24,6 @@ jobs:
             git reset --hard origin/main
 
             npm ci
-            npm build
+            npm run build
 
             pm2 restart rongta
