@@ -1,4 +1,4 @@
-const MESSAGE_TYPES = Object.freeze({
+export const MESSAGE_TYPES = {
     TEXT: "text",
     IMAGE: "image",
     VIDEO: "video",
@@ -13,6 +13,8 @@ const MESSAGE_TYPES = Object.freeze({
     ORDER: "order",
     SYSTEM: "system",
     UNKNOWN: "unknown",
-});
+} as const;
 
-module.exports = MESSAGE_TYPES;
+export type MessageType = typeof MESSAGE_TYPES[keyof typeof MESSAGE_TYPES];
+
+export default MESSAGE_TYPES;

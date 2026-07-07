@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Cloudflare Tunnel",
+      "type": "shell",
+      "command": "cloudflared",
+      "args": [
+        "tunnel",
+        "run",
+        "whatsapp_bot"
+      ],
+      "isBackground": true,
+      "presentation": {
+        "panel": "dedicated",
+        "group": "infra",
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Node Server",
+      "type": "npm",
+      "script": "dev",
+      "isBackground": true,
+      "presentation": {
+        "panel": "dedicated",
+        "group": "server",
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    // {
+    //   "label": "Log Viewer",
+    //   "type": "shell",
+    //   "command": "node ./dev/startLoggers.js",
+    //   "presentation": {
+    //     "panel": "dedicated",
+    //     "group": "logs",
+    //     "reveal": "always"
+    //   },
+    //   "problemMatcher": []
+    // },
+    {
+      "label": "Start Development Environment",
+      "dependsOn": [
+        "Cloudflare Tunnel",
+        "Log Viewer",
+        "Node Server"
+      ],
+      "dependsOrder": "parallel"
+    }
+  ]
+}

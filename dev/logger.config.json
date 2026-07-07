@@ -1,0 +1,19 @@
+{
+  "loggers": [
+    {
+      "name": "main",
+      "title": "Main Server",
+      "fifo": "/tmp/nodelogs-main"
+    },
+    {
+      "name": "http",
+      "title": "HTTP Requests",
+      "fifo": "/tmp/nodelogs-http"
+    },
+    {
+      "name": "db",
+      "title": "Database",
+      "fifo": "/tmp/nodelogs-db"
+    }
+  ]
+}
