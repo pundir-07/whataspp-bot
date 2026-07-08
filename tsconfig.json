@@ -11,6 +11,6 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true
   },
-  "include": ["src/**/*", "tests/**/*", "dev"],
+  "include": ["src/**/*", "tests/**/*", "dev", "scripts/migrate.js"],
   "exclude": ["node_modules", "dist"]
 }

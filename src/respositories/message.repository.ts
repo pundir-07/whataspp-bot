@@ -47,7 +47,7 @@ export async function upsertMessage(waId: string, message: MessageDTO): Promise<
             message.status ?? "received",
             message.type,
             message.content,
-            message.sentAt ? new Date(Number(message.sentAt) * 1000) : new Date(),
+            message.sentAt 
         ]
     );
 
